@@ -26,7 +26,7 @@ const Home = () => {
     getProjects();
   }, []);
   return (
-    <div className="home container mx-auto py-20 grid grid-cols-3 gap-10">
+    <div className="home container mx-auto py-10 grid grid-cols-3 gap-10">
       <div className="left col-span-2">
         <h2 className="text-3xl font-medium text-purple-400">All Projects</h2>
         <div className="projects-wrapper flex gap-10 flex-wrap">
