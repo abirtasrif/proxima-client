@@ -16,7 +16,6 @@ const Home = () => {
         const data = await res.json();
         setProjects(data);
         setLoading(false);
-        console.log(data);
       } catch (err) {
         setError(err.message);
         setLoading(false);

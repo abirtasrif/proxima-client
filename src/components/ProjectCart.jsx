@@ -3,7 +3,7 @@ import { currencyFormatter } from "../utils/currencyFormatter";
 
 const ProjectCart = ({ project }) => {
   return (
-    <div className="project bg-slate-800 rounded-xl shadow-xl border border-slate-700 flex flex-col gap-5 p-5 w-[19rem]">
+    <div className="project bg-slate-800 rounded-xl shadow-xl border border-slate-700 flex flex-col gap-5 p-5 w-[25rem]">
       <div className="top">
         <span className="text-violet-400">ID:{project._id}</span>
         <h3 className="text-3xl font-medium truncate">{project.title}</h3>

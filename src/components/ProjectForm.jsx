@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ProjectForm = () => {
+  const [title, setTitle] = useState("");
+  const [tech, setTech] = useState("");
+  const [budget, setBudget] = useState("");
+  const [duration, setDuration] = useState("");
+  const [manager, setManager] = useState("");
+  const [dev, setDev] = useState("");
+  const [error, setError] = useState("null");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    //data
+    const project = { title, tech, budget, duration, manager, dev };
+    //post request
+
+    const res = await fetch("http://localhost:5000/api/projects", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(project),
+    });
+
+    const json = await res.json();
+
+    //!res.ok, setError
+    if (!res.ok) {
+      setError(json.error);
+    }
+    //res.ok, reset
+    if (res.ok) {
+      setTitle("");
+      setTech("");
+      setBudget("");
+      setDuration("");
+      setManager("");
+      setDev("");
+      setError(null);
+
+      console.log("New project added", json);
+    }
+  };
+
   return (
-    <form className="project-form flex flex-col gap-2">
+    <form onSubmit={handleSubmit} className="project-form flex flex-col gap-2">
       <h2 className="text-3xl font-medium text-purple-400">
         Add a new project
       </h2>
@@ -15,6 +58,8 @@ const ProjectForm = () => {
           Project Title
         </label>
         <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           type="text"
           placeholder="e.g. e-commerce website"
           id="title"
@@ -30,6 +75,8 @@ const ProjectForm = () => {
           Technology
         </label>
         <input
+          value={tech}
+          onChange={(e) => setTech(e.target.value)}
           type="text"
           placeholder="e.g. nodeJS, React, Redux etc."
           id="tech"
@@ -45,6 +92,8 @@ const ProjectForm = () => {
           Budget (In USD)
         </label>
         <input
+          value={budget}
+          onChange={(e) => setBudget(e.target.value)}
           type="number"
           placeholder="e.g. 500"
           id="budget"
@@ -60,6 +109,8 @@ const ProjectForm = () => {
           Duration (In weeks)
         </label>
         <input
+          value={duration}
+          onChange={(e) => setDuration(e.target.value)}
           type="number"
           placeholder="e.g. 4"
           id="duration"
@@ -75,6 +126,8 @@ const ProjectForm = () => {
           Manager
         </label>
         <input
+          value={manager}
+          onChange={(e) => setManager(e.target.value)}
           type="text"
           placeholder="e.g. John Doe"
           id="manager"
@@ -90,9 +143,11 @@ const ProjectForm = () => {
           No. of Developers
         </label>
         <input
+          value={dev}
+          onChange={(e) => setDev(e.target.value)}
           type="number"
           placeholder="e.g. 5"
-          id="devs"
+          id="dev"
           className="bg-transparent border border-slate-500 py-3 px-5 rounded-lg outline-none focus:border-violet-400"
         />
       </div>
@@ -103,6 +158,11 @@ const ProjectForm = () => {
       >
         Add Project
       </button>
+      {error && (
+        <p className="bg-rose-500/20 p-5 text-rose-500 border border-rose-500 rounded-lg">
+          {error}
+        </p>
+      )}
     </form>
   );
 };
