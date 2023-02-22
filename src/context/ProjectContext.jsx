@@ -1,12 +1,12 @@
 import { createContext, useReducer } from "react";
 
 const initialState = {
-  projects: null,
+  projects: [],
 };
 
 export const projectReducer = (state, action) => {
   switch (action.type) {
-    case "GET_PROJECTS":
+    case "SET_PROJECTS":
       return {
         projects: action.payload,
       };
