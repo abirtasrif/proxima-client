@@ -8,7 +8,7 @@ const ProjectForm = () => {
   const [duration, setDuration] = useState("");
   const [manager, setManager] = useState("");
   const [dev, setDev] = useState("");
-  const [error, setError] = useState("null");
+  const [error, setError] = useState(null);
 
   const { dispatch } = useProjectsContext();
 
@@ -33,6 +33,7 @@ const ProjectForm = () => {
     //!res.ok, setError
     if (!res.ok) {
       setError(json.error);
+      console.log(json.error);
     }
     //res.ok, reset
     if (res.ok) {
