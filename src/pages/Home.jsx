@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ProjectCart from "../components/ProjectCart";
+import ProjectCard from "../components/ProjectCard";
 import ProjectForm from "../components/ProjectForm";
 import { useProjectsContext } from "../hooks/useProjectsContext";
 
@@ -26,7 +26,7 @@ const Home = () => {
         <div className="projects-wrapper flex gap-10 flex-wrap">
           {projects &&
             projects.map((project) => (
-              <ProjectCart key={project._id} project={project} />
+              <ProjectCard key={project._id} project={project} />
             ))}
         </div>
       </div>

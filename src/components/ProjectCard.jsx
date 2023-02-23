@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import { useProjectsContext } from "../hooks/useProjectsContext";
 import moment from "moment";
 
 const ProjectCart = ({ project }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const { dispatch } = useProjectsContext();
 
   const handleDelete = async () => {
@@ -19,6 +21,17 @@ const ProjectCart = ({ project }) => {
       dispatch({ type: "DELETE_PROJECT", payload: json });
     }
   };
+
+  const handleUpdate = () => {
+    setIsModalOpen(true);
+    setIsOverlayOpen(true);
+  };
+
+  const handleOverlay = () => {
+    setIsModalOpen(false);
+    setIsOverlayOpen(false);
+  };
+
   return (
     <div className="project bg-slate-800 rounded-xl shadow-xl border border-slate-700 flex flex-col gap-5 p-5 w-[25rem]">
       <div className="top">
@@ -50,7 +63,10 @@ const ProjectCart = ({ project }) => {
       </div>
 
       <div className="bottom flex gap-5">
-        <button className="bg-violet-400 text-slate-900 py-2 px-5 rounded-xl hover:bg-violet-50 duration-300">
+        <button
+          onClick={handleUpdate}
+          className="bg-violet-400 text-slate-900 py-2 px-5 rounded-xl hover:bg-violet-50 duration-300"
+        >
           Update
         </button>
         <button
@@ -60,6 +76,15 @@ const ProjectCart = ({ project }) => {
           Delete
         </button>
       </div>
+
+      {/* overlay */}
+      <div
+        onClick={handleOverlay}
+        className={`overlay fixed z-[1] h-screen w-screen bg-slate-900/50 backdrop-blur-sm top-0 left-0 right-0 bottom-0 ${
+          isOverlayOpen ? "" : "hidden"
+        }`}
+      ></div>
+      {/* modal */}
     </div>
   );
 };
