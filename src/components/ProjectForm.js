@@ -79,6 +79,7 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
         setError(null);
         setEmptyFields([]);
         //dispatch
+        dispatch({ type: "UPDATE_PROJECT", payload: json });
         //close overlay & modal
         setIsModalOpen(false);
         setIsOverlayOpen(false);
