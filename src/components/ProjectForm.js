@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useProjectsContext } from "../hooks/useProjectsContext";
 
-const ProjectForm = () => {
-  const [title, setTitle] = useState("");
-  const [tech, setTech] = useState("");
-  const [budget, setBudget] = useState("");
-  const [duration, setDuration] = useState("");
-  const [manager, setManager] = useState("");
-  const [dev, setDev] = useState("");
+const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
+  const [title, setTitle] = useState(project ? project.title : "");
+  const [tech, setTech] = useState(project ? project.tech : "");
+  const [budget, setBudget] = useState(project ? project.budget : "");
+  const [duration, setDuration] = useState(project ? project.duration : "");
+  const [manager, setManager] = useState(project ? project.manager : "");
+  const [dev, setDev] = useState(project ? project.dev : "");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
@@ -19,40 +19,82 @@ const ProjectForm = () => {
     //data
     const projectObj = { title, tech, budget, duration, manager, dev };
 
-    //post request
+    // if no project, post request
+    if (!project) {
+      const res = await fetch("http://localhost:5000/api/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(projectObj),
+      });
 
-    const res = await fetch("http://localhost:5000/api/projects", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(projectObj),
-    });
+      const json = await res.json();
 
-    const json = await res.json();
+      //!res.ok, setError
+      if (!res.ok) {
+        setError(json.error);
+        setEmptyFields(json.emptyFields);
+      }
+      //res.ok, reset
+      if (res.ok) {
+        setTitle("");
+        setTech("");
+        setBudget("");
+        setDuration("");
+        setManager("");
+        setDev("");
+        setError(null);
+        setEmptyFields([]);
+        dispatch({ type: "CREATE_PROJECT", payload: json });
+      }
 
-    //!res.ok, setError
-    if (!res.ok) {
-      setError(json.error);
-      setEmptyFields(json.emptyFields);
+      return;
     }
-    //res.ok, reset
-    if (res.ok) {
-      setTitle("");
-      setTech("");
-      setBudget("");
-      setDuration("");
-      setManager("");
-      setDev("");
-      setError(null);
-      setEmptyFields([]);
-      dispatch({ type: "CREATE_PROJECT", payload: json });
+
+    //if there is a project, patch
+    if (project) {
+      //send patch req
+      const res = await fetch(
+        `http://localhost:5000/api/projects/${project._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(projectObj),
+        }
+      );
+
+      const json = await res.json();
+
+      //!res.ok
+      if (!res.ok) {
+        setError(json.error);
+        setEmptyFields(json.emptyFields);
+      }
+
+      //res.ok
+      if (res.ok) {
+        setError(null);
+        setEmptyFields([]);
+        //dispatch
+        //close overlay & modal
+        setIsModalOpen(false);
+        setIsOverlayOpen(false);
+      }
+
+      return;
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="project-form flex flex-col gap-2">
-      <h2 className="text-3xl font-medium text-purple-400">
+      <h2
+        className={`text-3xl font-medium text-purple-400 ${
+          project ? "hidden" : ""
+        }`}
+      >
         Add a new project
       </h2>
 
@@ -184,7 +226,7 @@ const ProjectForm = () => {
         type="submit"
         className="bg-violet-400 text-slate-900 py-3 rounded-lg hover:bg-violet-50 duration-300"
       >
-        Add Project
+        {project ? "Confirm Update" : "Add Project"}
       </button>
       {error && (
         <p className="bg-rose-500/20 p-5 text-rose-500 border border-rose-500 rounded-lg">
