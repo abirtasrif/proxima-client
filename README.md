@@ -4,7 +4,7 @@ Proxima is a powerful project management app built using the MERN stack. With Pr
 ## Features
 Proxima comes packed with a variety of useful features, including:
 
-<b> Effortlessly manage projects: </b> Create, update, and delete projects quickly and easily using the user-friendly interface.
+<b> Effortlessly manage projects: </b> Create, update, and delete projects quickly and easily using the user-friendly interface. <br />
 <b>Robust security features: </b> The app features highly secure JWT authentication and frontend route protection, ensuring that your data is always safe and secure.<br />
 <b>User-specific project views: </b> Users can only see the projects they have created, ensuring that project information is kept private and secure.<br />
 <b>Intuitive and streamlined UI: </b> The app's sleek and intuitive user interface makes managing projects a breeze.
