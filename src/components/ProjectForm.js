@@ -117,7 +117,7 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
           placeholder="e.g. e-commerce website"
           id="title"
           className={`bg-transparent border  py-3 px-5 rounded-lg outline-none focus:border-violet-400 duration-300 ${
-            emptyFields.includes(`title`)
+            emptyFields?.includes(`title`)
               ? "border-rose-500"
               : "border-slate-500"
           }`}
@@ -138,7 +138,7 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
           placeholder="e.g. nodeJS, React, Redux etc."
           id="tech"
           className={`bg-transparent border  py-3 px-5 rounded-lg outline-none focus:border-violet-400 duration-300 ${
-            emptyFields.includes(`tech`)
+            emptyFields?.includes(`tech`)
               ? "border-rose-500"
               : "border-slate-500"
           }`}
@@ -159,7 +159,7 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
           placeholder="e.g. 500"
           id="budget"
           className={`bg-transparent border  py-3 px-5 rounded-lg outline-none focus:border-violet-400 duration-300 ${
-            emptyFields.includes(`budget`)
+            emptyFields?.includes(`budget`)
               ? "border-rose-500"
               : "border-slate-500"
           }`}
@@ -180,7 +180,7 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
           placeholder="e.g. 4"
           id="duration"
           className={`bg-transparent border  py-3 px-5 rounded-lg outline-none focus:border-violet-400 duration-300 ${
-            emptyFields.includes(`duration`)
+            emptyFields?.includes(`duration`)
               ? "border-rose-500"
               : "border-slate-500"
           }`}
@@ -201,7 +201,7 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
           placeholder="e.g. John Doe"
           id="manager"
           className={`bg-transparent border  py-3 px-5 rounded-lg outline-none focus:border-violet-400 duration-300 ${
-            emptyFields.includes(`text`)
+            emptyFields?.includes(`manager`)
               ? "border-rose-500"
               : "border-slate-500"
           }`}
@@ -222,7 +222,9 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
           placeholder="e.g. 5"
           id="dev"
           className={`bg-transparent border  py-3 px-5 rounded-lg outline-none focus:border-violet-400 duration-300 ${
-            emptyFields.includes(`dev`) ? "border-rose-500" : "border-slate-500"
+            emptyFields?.includes(`dev`)
+              ? "border-rose-500"
+              : "border-slate-500"
           }`}
         />
       </div>
