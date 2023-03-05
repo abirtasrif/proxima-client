@@ -4,7 +4,7 @@ const initialState = {
   projects: [],
 };
 
-export const projectReducer = (state, action) => {
+export const projectsReducer = (state, action) => {
   switch (action.type) {
     case "SET_PROJECTS":
       return {
@@ -24,8 +24,8 @@ export const projectReducer = (state, action) => {
         ),
       };
     case "UPDATE_PROJECT":
-      const existingProject = state.projects.filter(
-        (project) => project._id === action.payload
+      const [existingProject] = state.projects.filter(
+        (project) => project._id === action.payload._id
       );
 
       return {
@@ -45,7 +45,7 @@ export const projectReducer = (state, action) => {
 export const ProjectContext = createContext();
 
 export const ProjectContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(projectReducer, initialState);
+  const [state, dispatch] = useReducer(projectsReducer, initialState);
 
   return (
     <ProjectContext.Provider value={{ ...state, dispatch }}>

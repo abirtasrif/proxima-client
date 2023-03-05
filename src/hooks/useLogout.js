@@ -6,7 +6,7 @@ export const useLogout = () => {
   const { dispatch: projectsDispatch } = useProjectsContext();
 
   const logout = () => {
-    //clear ls
+    //clear localStorage
     localStorage.removeItem("user");
 
     //dispatch logout

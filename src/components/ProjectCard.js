@@ -19,7 +19,9 @@ const ProjectCart = ({ project }) => {
       `http://localhost:5000/api/projects/${project._id}`,
       {
         method: "DELETE",
-        Authorization: `Bearer ${user.token}`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       }
     );
     const json = await res.json();
@@ -56,16 +58,17 @@ const ProjectCart = ({ project }) => {
             Added on: {moment(project.createdAt).format("DD-MMM-YY, hh:mm A")}
           </span>
           <span>
-            Last Update:{" "}
+            Last Update:
             {moment(project.updatedAt).format("DD-MMM-YY, hh:mm A")}
           </span>
         </div>
         <div className="right flex flex-col">
           <span>{project.manager}</span>
           <span>{project.dev}</span>
-          <span>{`${project.duration} week${
-            project.duration === 1 ? "" : "s"
-          }`}</span>
+          <span>
+            Duration:
+            {`${project.duration} week${project.duration === 1 ? "" : "s"}`}
+          </span>
         </div>
       </div>
 
