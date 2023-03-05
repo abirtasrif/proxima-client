@@ -2,13 +2,19 @@ import React, { useEffect } from "react";
 import ProjectCard from "../components/ProjectCard";
 import ProjectForm from "../components/ProjectForm";
 import { useProjectsContext } from "../hooks/useProjectsContext";
+import { user } from "../context/AuthContext";
 
 const Home = () => {
   const { projects, dispatch } = useProjectsContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const getAllProjects = async () => {
-      const res = await fetch("http://localhost:5000/api/projects");
+      const res = await fetch("http://localhost:5000/api/projects", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const json = await res.json();
 
       if (res.ok) {
