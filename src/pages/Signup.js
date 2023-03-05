@@ -56,6 +56,7 @@ const Signup = () => {
       </div>
 
       <button
+        disabled={loading}
         type="submit"
         className="bg-violet-400 text-slate-900 py-3 rounded-xl hover:bg-violet-500 duration-300 mt-3"
       >
