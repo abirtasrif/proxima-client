@@ -18,6 +18,11 @@ const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      setError("You must be logged in!");
+      return;
+    }
+
     //data
     const projectObj = { title, tech, budget, duration, manager, dev };
 

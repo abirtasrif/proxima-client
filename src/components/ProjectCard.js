@@ -16,7 +16,7 @@ const ProjectCart = ({ project }) => {
       return;
     }
     const res = await fetch(
-      `http://localhost:5000/api/projects/${project._id}`,
+      `${process.env.REACT_APP_BASE_URL}/api/projects/${project._id}`,
       {
         method: "DELETE",
         headers: {
@@ -51,7 +51,7 @@ const ProjectCart = ({ project }) => {
         </span>
       </div>
 
-      <div className="mid mid-slate-300 flex gap-10">
+      <div className="mid text-slate-300 flex gap-10">
         <div className="left flex flex-col">
           <span>Budget: {currencyFormatter(project.budget)}</span>
           <span>
