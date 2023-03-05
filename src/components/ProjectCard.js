@@ -3,7 +3,7 @@ import { currencyFormatter } from "../utils/currencyFormatter";
 import { useProjectsContext } from "../hooks/useProjectsContext";
 import moment from "moment";
 import ProjectForm from "./ProjectForm";
-import useAuthContext from "../context/AuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProjectCart = ({ project }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

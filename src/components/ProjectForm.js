@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useProjectsContext } from "../hooks/useProjectsContext";
-import useAuthContext from "../context/AuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProjectForm = ({ project, setIsModalOpen, setIsOverlayOpen }) => {
   const [title, setTitle] = useState(project ? project.title : "");
