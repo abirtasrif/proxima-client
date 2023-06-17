@@ -19,7 +19,14 @@ const Signup = () => {
       onSubmit={handleSignup}
       className="signup-form flex flex-col gap-5 py-20 mx-auto max-w-sm"
     >
-      <h2 className="text-4xl font-medium text-violet-400 mb-10">Signup</h2>
+      <h2 className="text-4xl font-medium text-violet-400 mb-3">Signup</h2>
+      <p className="font-normal text-violet-400 mb-7">
+        Note:
+        <span className="font-extralight ml-1">
+          The backend server is hosted in free server. Please wait 30 sec to
+          establish the connection
+        </span>
+      </p>
 
       <div className="form-control flex flex-col gap-2">
         <label
